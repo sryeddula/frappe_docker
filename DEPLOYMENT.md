@@ -139,6 +139,17 @@ docker compose --env-file .env.prod \
 
 ---
 
+## Restart Stack
+
+```bash
+docker compose --env-file .env.prod \
+  -f compose.yaml \
+  -f overrides/compose.mariadb.yaml \
+  -f overrides/compose.redis.yaml \
+  -f overrides/compose.noproxy.yaml \
+  restart
+```
+
 ## Stop Stack
 
 ```bash
