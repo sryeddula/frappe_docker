@@ -1,8 +1,8 @@
-# ERPNext Production Deployment — erp.langmere.com
+# ERPNext Production Deployment — hrms.nanoit-solutions.com
 
 ## Overview
 
-- **Host:** erp.langmere.com
+- **Host:** hrms.nanoit-solutions.com
 - **ERPNext Version:** v16.16.0 (latest)
 - **Apps:** erpnext, hrms (HR & Payroll)
 - **Proxy:** Cloudflare (SSL termination at edge)
@@ -50,7 +50,7 @@
 | `CUSTOM_TAG` | 16 |
 | `PULL_POLICY` | never (use local image) |
 | `DB_PASSWORD` | *(see .env.prod)* |
-| `FRAPPE_SITE_NAME_HEADER` | erp.langmere.com |
+| `FRAPPE_SITE_NAME_HEADER` | hrms.nanoit-solutions.com |
 | `HTTP_PUBLISH_PORT` | 6767 |
 | `UPSTREAM_REAL_IP_HEADER` | X-Forwarded-For |
 
@@ -94,7 +94,7 @@ docker compose --env-file .env.prod \
   -f overrides/compose.redis.yaml \
   -f overrides/compose.noproxy.yaml \
   exec backend \
-  bench new-site erp.langmere.com \
+  bench new-site hrms.nanoit-solutions.com \
     --mariadb-user-host-login-scope='%' \
     --db-root-username=root \
     --db-root-password="<DB_PASSWORD from .env.prod>" \
@@ -115,14 +115,14 @@ docker compose --env-file .env.prod \
   -f overrides/compose.redis.yaml \
   -f overrides/compose.noproxy.yaml \
   exec backend \
-  bench --site erp.langmere.com install-app hrms
+  bench --site hrms.nanoit-solutions.com install-app hrms
 ```
 
 ---
 
 ## Login
 
-- **URL:** https://erp.langmere.com
+- **URL:** https://hrms.nanoit-solutions.com
 - **Username:** `Administrator`
 - **Password:** *(set via `--admin-password` during site creation)*
 
@@ -130,7 +130,7 @@ docker compose --env-file .env.prod \
 
 ## Cloudflare Configuration
 
-- DNS A record for `erp.langmere.com` → server IP, **Proxied (orange cloud)**
+- DNS A record for `hrms.nanoit-solutions.com` → server IP, **Proxied (orange cloud)**
 - SSL/TLS mode: **Full** (not Full Strict — origin is plain HTTP)
 - Cloudflare forwards public ports 80/443 → origin port 6767
 - Real client IP passed via `X-Forwarded-For` header
